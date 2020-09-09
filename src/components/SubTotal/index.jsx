@@ -2,16 +2,20 @@ import React from "react";
 import CurrencyFormat from "react-currency-format";
 
 import { Container } from "./styles";
+import { useStateValue } from "../../store/StateProvider";
+import { getBasketTotal } from "../../store/reducer";
 
-export default function index() {
+export default function Index() {
+  const [{ basket }, dispatch] = useStateValue();
+
   return (
     <Container>
       <CurrencyFormat
         renderText={(value) => (
           <>
             <p>
-              Subtotal (0 items): {/* Total de itens */}
-              <strong>0</strong>
+              Subtotal ({basket?.length} items): {/* Total de itens */}
+              <strong>{value}</strong>
             </p>
             <small>
               <input type="checkbox" /> This order contains a gift
@@ -19,7 +23,7 @@ export default function index() {
           </>
         )}
         decimalScale={2}
-        value={0} // Valor a pagar
+        value={getBasketTotal(basket)} // Valor a pagar
         displayType={"text"}
         thousandSeparator={true} // Virgulas em valores de milhar
         prefix={"$"}

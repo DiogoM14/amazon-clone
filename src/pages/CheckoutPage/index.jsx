@@ -10,8 +10,9 @@ import CheckoutBanner from "../../assets/checkout-banner.jpg";
 
 import Header from "../../components/Header";
 import SubTotal from "../../components/SubTotal";
+import { useStateValue } from "../../store/StateProvider";
 
-function index() {
+function Index() {
   return (
     <>
       <Header />
@@ -32,4 +33,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

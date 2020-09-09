@@ -3,10 +3,14 @@ import React from "react";
 import { Container, HeaderSearch, HeaderNav } from "./styles";
 
 import { Link } from "react-router-dom";
+import { useStateValue } from "../../store/StateProvider";
 import { MdShoppingBasket, MdSearch } from "react-icons/md";
+
 import Logo from "../../assets/logo.png";
 
-export default function index() {
+export default function Index() {
+  const [{ basket }] = useStateValue();
+
   return (
     <Container>
       <Link to="/">
@@ -35,7 +39,9 @@ export default function index() {
         <Link to="/checkout">
           <div className="header__optionBasket">
             <MdShoppingBasket size={25} />
-            <span className="header__optionLineTwo header__basketCount">0</span>
+            <span className="header__optionLineTwo header__basketCount">
+              {basket?.length}
+            </span>
           </div>
         </Link>
       </HeaderNav>
