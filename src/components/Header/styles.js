@@ -9,11 +9,14 @@ export const Container = styled.div`
   top: 0;
   z-index: 100;
 
+  a {
+    margin-right: 2%;
+  }
+
   img {
     width: 100px;
     object-fit: contain;
     margin: 0 20px;
-    margin-right: 3%;
     margin-top: 18px;
     cursor: pointer;
   }
@@ -46,6 +49,7 @@ export const HeaderNav = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-left: 3%;
+  align-items: center;
 
   .header__option {
     display: flex;
