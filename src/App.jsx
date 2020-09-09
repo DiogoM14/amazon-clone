@@ -1,13 +1,12 @@
-import React from 'react';
-import Global from './styles/global';
+import React from "react";
+import Global from "./styles/global";
 
-import Header from './components/Header';
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <>
-      <Header />
-      {/* Home */}
+      <MainPage />
       <Global />
     </>
   );

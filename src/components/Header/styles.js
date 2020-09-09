@@ -15,6 +15,7 @@ export const Container = styled.div`
     margin: 0 20px;
     margin-right: 3%;
     margin-top: 18px;
+    cursor: pointer;
   }
 `;
 
@@ -22,6 +23,7 @@ export const HeaderSearch = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
+  cursor: pointer;
 
   input {
     width: 100%;
@@ -35,7 +37,7 @@ export const HeaderSearch = styled.div`
     padding: 5px;
     height: 28px !important;
     width: 30px;
-    background: #cd9042;
+    background: #f0c14b;
     border-radius: 0 4px 4px 0;
   }
 `;
@@ -50,6 +52,7 @@ export const HeaderNav = styled.div`
     flex-direction: column;
     margin: 0 10px;
     color: white;
+    cursor: pointer;
   }
 
   .header__optionLineOne {
@@ -65,6 +68,7 @@ export const HeaderNav = styled.div`
     display: flex;
     align-items: center;
     color: white;
+    cursor: pointer;
 
     .header__basketCount {
       margin: 0 10px;
