@@ -1,8 +1,25 @@
 import React from "react";
 
 import { Container, ProductInfo } from "./styles";
+import { useStateValue } from "../../store/StateProvider";
 
-export default function index({ id, title, image, price, rating }) {
+export default function Index({ id, title, image, price, rating }) {
+  const [{ basket }, dispatch] = useStateValue();
+
+  const addToBasket = () => {
+    //  Envia o item para a dataLayer
+    dispatch({
+      type: "ADD_TO_BASKET",
+      item: {
+        id: id,
+        title: title,
+        image: image,
+        price: price,
+        rating: rating,
+      },
+    });
+  };
+
   return (
     <Container>
       <ProductInfo>
@@ -21,7 +38,7 @@ export default function index({ id, title, image, price, rating }) {
       </ProductInfo>
       <img src={image} alt="" />
 
-      <button>Add to basket</button>
+      <button onClick={addToBasket}>Add to basket</button>
     </Container>
   );
 }
