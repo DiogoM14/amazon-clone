@@ -57,6 +57,7 @@ export const HeaderNav = styled.div`
 
   .header__optionLineOne {
     font-size: 10px;
+    color: #dddd;
   }
 
   .header__optionLineTwo {

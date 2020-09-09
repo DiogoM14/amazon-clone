@@ -1,12 +1,12 @@
 import React from "react";
 import Global from "./styles/global";
 
-import MainPage from "./pages/MainPage";
+import Router from "./router";
 
 function App() {
   return (
     <>
-      <MainPage />
+      <Router />
       <Global />
     </>
   );
