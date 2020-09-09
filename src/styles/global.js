@@ -7,5 +7,6 @@ export default createGlobalStyle`
 
   body {
     font-family: Roboto, sans-serif;
+    background: rgb(234, 237, 237);
   }
 `;

@@ -16,6 +16,14 @@ export default function index() {
           <Product />
           <Product />
         </HomeRow>
+        <HomeRow>
+          <Product />
+          <Product />
+          <Product />
+        </HomeRow>
+        <HomeRow>
+          <Product />
+        </HomeRow>
       </HomeContainer>
     </Container>
   );
