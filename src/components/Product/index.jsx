@@ -2,25 +2,24 @@ import React from "react";
 
 import { Container, ProductInfo } from "./styles";
 
-export default function index() {
+export default function index({ id, title, image, price, rating }) {
   return (
     <Container>
       <ProductInfo>
-        <p className="product__title">Dell XPS 15</p>
+        <p className="product__title">{title}</p>
         <p className="product__price">
           <small>$</small>
-          <strong>149.99</strong>
+          <strong>{price}</strong>
         </p>
         <div className="product__rating">
-          <p>⭐</p>
-          <p>⭐</p>
-          <p>⭐</p>
+          {Array(rating)
+            .fill()
+            .map((_, i) => (
+              <p>⭐</p>
+            ))}
         </div>
       </ProductInfo>
-      <img
-        src="https://imagens.canaltech.com.br/produto/1578685050-7479-principal-m.png"
-        alt=""
-      />
+      <img src={image} alt="" />
 
       <button>Add to basket</button>
     </Container>
