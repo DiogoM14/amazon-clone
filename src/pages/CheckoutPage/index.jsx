@@ -11,8 +11,11 @@ import CheckoutBanner from "../../assets/checkout-banner.jpg";
 import Header from "../../components/Header";
 import SubTotal from "../../components/SubTotal";
 import { useStateValue } from "../../store/StateProvider";
+import CheckoutProduct from "../../components/CheckoutProduct";
 
 function Index() {
+  const [{ basket }] = useStateValue();
+
   return (
     <>
       <Header />
@@ -22,6 +25,16 @@ function Index() {
 
           <ShoppingBasket>
             <h2>Your shopping Basket</h2>
+
+            {basket.map((item) => (
+              <CheckoutProduct
+                id={item.id}
+                title={item.title}
+                image={item.image}
+                price={item.price}
+                rating={item.rating}
+              />
+            ))}
           </ShoppingBasket>
         </CheckoutLeft>
 
