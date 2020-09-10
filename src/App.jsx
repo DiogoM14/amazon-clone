@@ -10,23 +10,26 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      console.log("THE USER IS >>>", authUser);
+      console.log("THE USER IS >>> ", authUser);
 
       if (authUser) {
-        //  Se o user acabou de logar / o user já estava logado
+        // the user just logged in / the user was logged in
+
         dispatch({
           type: "SET_USER",
           user: authUser,
         });
       } else {
-        // o user não está logado
+        // the user is logged out
         dispatch({
           type: "SET_USER",
           user: null,
         });
       }
     });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Router />

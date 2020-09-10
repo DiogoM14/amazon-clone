@@ -7,9 +7,16 @@ import { useStateValue } from "../../store/StateProvider";
 import { MdShoppingBasket, MdSearch } from "react-icons/md";
 
 import Logo from "../../assets/logo.png";
+import { auth } from "../../services/firebase";
 
 export default function Index() {
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
+
+  const handleAuthentication = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
 
   return (
     <Container>
@@ -23,10 +30,12 @@ export default function Index() {
       </HeaderSearch>
 
       <HeaderNav>
-        <Link to="/login">
-          <div className="header__option">
+        <Link to={!user && "/login"}>
+          <div onClick={handleAuthentication} className="header__option">
             <span className="header__optionLineOne">HelloGuest</span>
-            <span className="header__optionLineTwo">SignIn</span>
+            <span className="header__optionLineTwo">
+              {user ? "SignOut" : "SignIn"}
+            </span>
           </div>
         </Link>
         <div className="header__option">
