@@ -13,8 +13,12 @@ export const CheckoutLeft = styled.div`
 `;
 
 export const ShoppingBasket = styled.div`
+  h3 {
+    padding: 10px;
+  }
+
   h2 {
-    margin-right: 10px;
+    margin: 0 10px 10px 0;
     padding: 10px;
     border-bottom: 1px solid lightgray;
   }

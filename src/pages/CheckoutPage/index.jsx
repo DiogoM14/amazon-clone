@@ -14,7 +14,7 @@ import { useStateValue } from "../../store/StateProvider";
 import CheckoutProduct from "../../components/CheckoutProduct";
 
 function Index() {
-  const [{ basket }] = useStateValue();
+  const [{ basket, user }] = useStateValue();
 
   return (
     <>
@@ -24,6 +24,7 @@ function Index() {
           <img src={CheckoutBanner} alt="" />
 
           <ShoppingBasket>
+            <h3>Hello, {user?.email}</h3>
             <h2>Your shopping Basket</h2>
 
             {basket.map((item) => (

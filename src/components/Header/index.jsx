@@ -32,7 +32,7 @@ export default function Index() {
       <HeaderNav>
         <Link to={!user && "/login"}>
           <div onClick={handleAuthentication} className="header__option">
-            <span className="header__optionLineOne">HelloGuest</span>
+            <span className="header__optionLineOne">{user?.email}</span>
             <span className="header__optionLineTwo">
               {user ? "SignOut" : "SignIn"}
             </span>
