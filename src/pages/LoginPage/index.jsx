@@ -1,20 +1,39 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "../../services/firebase";
 
 import { Container, LoginContainer } from "./styles";
 
 import Logo from "../../assets/login-logo.webp";
 
 function Index() {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signIn = (e) => {
     e.preventDefault();
+
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((auth) => {
+        history.push("/");
+      })
+      .catch((error) => alert(error.message));
   };
 
   const register = (e) => {
     e.preventDefault();
+
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        if (auth) {
+          // Se o auth não estiver vazio
+          history.push("/");
+        }
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -55,7 +74,7 @@ function Index() {
             this test site!
           </p>
 
-          <button className="login__registerButton" onCLick={register}>
+          <button className="login__registerButton" onClick={register}>
             Create your Amazon account
           </button>
         </form>
