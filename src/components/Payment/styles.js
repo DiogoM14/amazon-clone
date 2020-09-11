@@ -28,8 +28,11 @@ export const PaymentContainer = styled.div`
     }
 
     .payment__address,
-    .payment__items {
+    .payment__items,
+    .payment__details {
       flex: 0.8;
     }
   }
 `;
+
+export const Form = styled.form``;

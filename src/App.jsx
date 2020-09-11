@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import Global from "./styles/global";
 
 import Router from "./router";
 import { auth } from "./services/firebase";
 import { useStateValue } from "./store/StateProvider";
+
+import Global from "./styles/global";
 
 function App() {
   const [{}, dispatch] = useStateValue();

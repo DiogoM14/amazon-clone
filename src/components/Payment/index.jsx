@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import CurrencyFormat from "react-currency-format";
 
-import { Container, PaymentContainer } from "./styles";
+import { Container, PaymentContainer, Form } from "./styles";
 
 import CheckoutProduct from "../CheckoutProduct/index.jsx";
 import { useStateValue } from "../../store/StateProvider";
+import { getBasketTotal } from "../../store/reducer";
 
 export default function Index() {
   const [{ basket, user }, dispatch] = useStateValue();
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(true);
+
+  const handleSubmit = (e) => {};
+
+  const handleChange = (event) => {
+    // Ouve as alterações no CardElement
+    // mostra os erros
+
+    setDisabled(event.empty);
+    setError(event.error ? event.error.message : "");
+  };
 
   return (
     <Container>
@@ -48,7 +67,22 @@ export default function Index() {
           <div className="payment__title">
             <h3>Payment Method</h3>
           </div>
-          <div className="payment__details"></div>
+          <div className="payment__details">
+            <Form onSubmit={handleSubmit}>
+              <CardElement onChange={handleChange} />
+
+              <div className="payment__priceContainer">
+                <CurrencyFormat
+                  renderText={(value) => <h3>Order Total: {value}</h3>}
+                  decimalScale={2}
+                  value={getBasketTotal(basket)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </div>
+            </Form>
+          </div>
         </div>
       </PaymentContainer>
     </Container>
