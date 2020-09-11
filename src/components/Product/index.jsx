@@ -3,7 +3,7 @@ import React from "react";
 import { Container, ProductInfo } from "./styles";
 import { useStateValue } from "../../store/StateProvider";
 
-export default function Index({ id, title, image, price, rating }) {
+export default function Index({ id, title, image, price, rating }, ref) {
   const [{ basket }, dispatch] = useStateValue();
 
   const addToBasket = () => {
