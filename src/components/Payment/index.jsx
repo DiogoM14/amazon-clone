@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
-import axios from "axios";
+import axios from "../../services/axios";
 
 import { Container, PaymentContainer, Form } from "./styles";
 
@@ -12,6 +12,7 @@ import { getBasketTotal } from "../../store/reducer";
 
 export default function Index() {
   const [{ basket, user }, dispatch] = useStateValue();
+  const history = useHistory();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -30,16 +31,29 @@ export default function Index() {
         // Stripe espera o total em subunidades
         url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
       });
+      setClientSecret(response.data.clientSecret);
     };
 
     getClientSecret();
-  }, [basket]);
+  }, [basket, setClientSecret]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
 
-    // const payload = await stripe
+    const payload = await stripe
+      .confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+        },
+      })
+      .then(({ paymentIntent }) => {
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false);
+
+        history.replace("/orders");
+      });
   };
 
   const handleChange = (event) => {
