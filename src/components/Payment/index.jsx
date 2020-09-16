@@ -9,6 +9,7 @@ import { Container, PaymentContainer, Form } from "./styles";
 import CheckoutProduct from "../CheckoutProduct/index.jsx";
 import { useStateValue } from "../../store/StateProvider";
 import { getBasketTotal } from "../../store/reducer";
+import { db } from "../../services/firebase";
 
 export default function Index() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -51,6 +52,16 @@ export default function Index() {
         },
       })
       .then(({ paymentIntent }) => {
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);

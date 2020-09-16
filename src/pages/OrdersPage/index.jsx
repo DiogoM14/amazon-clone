@@ -1,11 +1,16 @@
 import React from "react";
 
+import Header from "../../components/Header/index.jsx";
+
 import { Container } from "./styles";
 
 export default function index() {
   return (
-    <Container>
-      <h1>Orders</h1>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <h1>Orders</h1>
+      </Container>
+    </>
   );
 }
