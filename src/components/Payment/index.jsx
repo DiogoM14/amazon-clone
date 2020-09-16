@@ -37,6 +37,8 @@ export default function Index() {
     getClientSecret();
   }, [basket, setClientSecret]);
 
+  console.log("The secret is", clientSecret);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
