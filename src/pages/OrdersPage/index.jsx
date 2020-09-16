@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import Header from "../../components/Header/index.jsx";
+import Order from "../../components/Order/index.jsx";
+
 import { db } from "../../services/firebase.js";
 import { useStateValue } from "../../store/StateProvider.jsx";
 
-import { Container } from "./styles";
+import { Container, Orders } from "./styles";
 
 export default function Index() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -32,7 +34,11 @@ export default function Index() {
     <>
       <Header />
       <Container>
-        <h1>Orders</h1>
+        <Orders>
+          {orders?.map((order) => (
+            <Order order={order} />
+          ))}
+        </Orders>
       </Container>
     </>
   );
