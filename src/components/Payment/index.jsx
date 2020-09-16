@@ -20,24 +20,25 @@ export default function Index() {
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState("");
   const [error, setError] = useState(null);
-  const [clientSecret, setClientSecret, disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+  const [clientSecret, setClientSecret] = useState(true);
 
   useEffect(() => {
-    // gera um stripe secrete especial que aprova o carregamento do comprador
-
+    // generate the special stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
       const response = await axios({
         method: "post",
-        // Stripe espera o total em subunidades
+        // Stripe expects the total in a currencies subunits
         url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
       });
       setClientSecret(response.data.clientSecret);
     };
 
     getClientSecret();
-  }, [basket, setClientSecret]);
+  }, [basket]);
 
-  console.log("The secret is", clientSecret);
+  console.log("THE SECRET IS >>>", clientSecret);
+  console.log("👱", user);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -53,6 +54,10 @@ export default function Index() {
         setSucceeded(true);
         setError(null);
         setProcessing(false);
+
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
 
         history.replace("/orders");
       });
